@@ -1,1 +1,1 @@
-# autogen-play
+# wxauto-autogen
