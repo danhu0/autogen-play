@@ -34,7 +34,7 @@ boss_aid = RetrieveUserProxyAgent(
     max_consecutive_auto_reply=3,
     retrieve_config={
         "task": "code",
-        "docs_path": "https://raw.githubusercontent.com/microsoft/FLAML/main/website/docs/Examples/Integrate%20-%20Spark.md",
+        "docs_path": "https://raw.githubusercontent.com/microsoft/autogen/main/samples/tools/finetuning/README.md",
         "chunk_token_size": 1000,
         "model": config_list[0]["model"],
         "collection_name": "groupchat",
@@ -68,9 +68,6 @@ reviewer = autogen.AssistantAgent(
     description="Code Reviewer who can review the code.",
 )
 
-PROBLEM = "How to use spark for parallel training in FLAML? Give me sample code."
-
-
 def _reset_agents():
     boss.reset()
     boss_aid.reset()
@@ -95,22 +92,22 @@ def rag_chat():
     )
 
 
-def norag_chat():
-    _reset_agents()
-    groupchat = autogen.GroupChat(
-        agents=[boss, pm, coder, reviewer],
-        messages=[],
-        max_round=12,
-        speaker_selection_method="auto",
-        allow_repeat_speaker=False,
-    )
-    manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
+# def norag_chat():
+#     _reset_agents()
+#     groupchat = autogen.GroupChat(
+#         agents=[boss, pm, coder, reviewer],
+#         messages=[],
+#         max_round=12,
+#         speaker_selection_method="auto",
+#         allow_repeat_speaker=False,
+#     )
+#     manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
-    # Start chatting with the boss as this is the user proxy agent.
-    boss.initiate_chat(
-        manager,
-        message=PROBLEM,
-    )
+#     # Start chatting with the boss as this is the user proxy agent.
+#     boss.initiate_chat(
+#         manager,
+#         message=PROBLEM,
+#     )
 
 
 def call_rag_chat():
@@ -164,5 +161,6 @@ def call_rag_chat():
         message=PROBLEM,
     )
 
+PROBLEM = "How to use autogen and refine the models based on my needs. Provide code samples."
 
 rag_chat()
