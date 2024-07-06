@@ -92,24 +92,6 @@ def rag_chat():
     )
 
 
-# def norag_chat():
-#     _reset_agents()
-#     groupchat = autogen.GroupChat(
-#         agents=[boss, pm, coder, reviewer],
-#         messages=[],
-#         max_round=12,
-#         speaker_selection_method="auto",
-#         allow_repeat_speaker=False,
-#     )
-#     manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config)
-
-#     # Start chatting with the boss as this is the user proxy agent.
-#     boss.initiate_chat(
-#         manager,
-#         message=PROBLEM,
-#     )
-
-
 def call_rag_chat():
     _reset_agents()
 
